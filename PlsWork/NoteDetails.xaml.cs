@@ -69,7 +69,7 @@ namespace PlsWork
         {
             trange = new TextRange(titleRichTextBox.Document.ContentStart, titleRichTextBox.Document.ContentEnd);
             note.Title = (Regex.Replace(trange.Text, "[\']", "\'\'")).Trim();
-            note.Content = SaveXamlPackage(path);
+            note.Content = getContent();
             db.UpdateNote(note);
         }
 
@@ -86,7 +86,7 @@ namespace PlsWork
             //note.Title = trange.Text.Trim();
             worker.RunWorkerAsync();
             //db.UpdateNote(note);
-            //note.Content = SaveXamlPackage(path);  // await Task.Run(()=> getContent());
+            //note.Content = SaveXamlPackage(path);  // await Task.Run(()=> getContent());;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -99,7 +99,16 @@ namespace PlsWork
 
         string getContent()
         {
-            return SaveXamlPackage(path);
+            //return SaveXamlPackage(path);
+
+            string rtfText;
+            TextRange crange = new TextRange(contentRichTextBox.Document.ContentStart, contentRichTextBox.Document.ContentEnd);
+            using (var stream = new MemoryStream())
+            {
+                this.Dispatcher.Invoke(() => { crange.Save(stream, DataFormats.Rtf); });
+                return rtfText = Regex.Replace(Encoding.UTF8.GetString(stream.ToArray()), "[\']", "\'\'");
+            }
+
         }
 
         private void setData()
@@ -140,7 +149,7 @@ namespace PlsWork
             stream.Close();
         }
 
-        string SaveXamlPackage(string _fileName)
+        /*string SaveXamlPackage(string _fileName)
         {
             TextRange range;
             FileStream fStream;
@@ -202,6 +211,6 @@ namespace PlsWork
                     fStream.Close();
                 }
             }
-        }
+        }*/
     }
 }

@@ -69,7 +69,7 @@ namespace PlsWork
 
             trange = new TextRange(titleEditText.Document.ContentStart, titleEditText.Document.ContentEnd);
             trange.Text = tempNote.Title;
-            tempNote.Content = SaveXamlPackage(path);
+            tempNote.Content = GetContent();
 
             worker.DoWork += Worker_DoWork;
             worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
@@ -86,7 +86,7 @@ namespace PlsWork
         {
             trange = new TextRange(titleEditText.Document.ContentStart, titleEditText.Document.ContentEnd);
             tempNote.Title = (Regex.Replace(trange.Text, "[\']", "\'\'")).Trim();
-            tempNote.Content = SaveXamlPackage(path);
+            tempNote.Content = GetContent();
             db.UpdateNote(tempNote);
         }
 
@@ -104,8 +104,9 @@ namespace PlsWork
             {
                 e.Cancel = true;
 
-                titleEditText.RaiseEvent(new RoutedEventArgs(RichTextBox.TextChangedEvent));
+                // titleEditText.RaiseEvent(new RoutedEventArgs(RichTextBox.TextChangedEvent));
                 //db.AddNote(tempNote);
+                worker.RunWorkerAsync();
             }
         }
 
@@ -173,7 +174,18 @@ namespace PlsWork
             //tempNote.Content = LoadXamlPackage("B:\\test.xaml");
         }
 
-        string SaveXamlPackage(string _fileName)
+        string GetContent()
+        {
+            string text;
+            var crange = new TextRange(contentTextBox.Document.ContentStart, contentTextBox.Document.ContentEnd);
+            using (var stream = new MemoryStream())
+            {
+                this.Dispatcher.Invoke(() => { crange.Save(stream, DataFormats.Rtf); });
+                return text = Regex.Replace(Encoding.UTF8.GetString(stream.ToArray()), "[\']", "\'\'");
+            }
+        }
+
+        /*string SaveXamlPackage(string _fileName)
         {
             TextRange range;
             FileStream fStream;
@@ -239,12 +251,12 @@ namespace PlsWork
                 //range.Load(stream, DataFormats.Rtf);
                 fStream.Close();
             }
-        }
+        }*/
 
         private void savingButton_Click(object sender, RoutedEventArgs e)
         {
             tempNote.Title = trange.Text.Trim();
-            tempNote.Content = SaveXamlPackage(path);
+            tempNote.Content = GetContent();
             db.UpdateNote(tempNote);
         }
     }
