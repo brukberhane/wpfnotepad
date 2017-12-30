@@ -83,23 +83,16 @@ namespace PlsWork
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            //note.Title = trange.Text.Trim();
             worker.RunWorkerAsync();
-            //db.UpdateNote(note);
-            //note.Content = SaveXamlPackage(path);  // await Task.Run(()=> getContent());;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            /*note.Title = trange.Text.Trim();
-            note.Content = SaveXamlPackage(path);
-            db.UpdateNote(note);*/
             worker.RunWorkerAsync();
         }
 
         string getContent()
         {
-            //return SaveXamlPackage(path);
 
             string rtfText;
             TextRange crange = new TextRange(contentRichTextBox.Document.ContentStart, contentRichTextBox.Document.ContentEnd);
@@ -148,69 +141,5 @@ namespace PlsWork
             crange.Load(stream, DataFormats.Rtf);
             stream.Close();
         }
-
-        /*string SaveXamlPackage(string _fileName)
-        {
-            TextRange range;
-            FileStream fStream;
-            range = new TextRange(contentRichTextBox.Document.ContentStart, contentRichTextBox.Document.ContentEnd);
-            try
-            {
-                fStream = new FileStream(_fileName, FileMode.Create);
-                //range.Text = Regex.Replace(range.Text, "[\']", "\'\'");
-                this.Dispatcher.Invoke(() => { range.Save(fStream, DataFormats.Rtf); });
-                fStream.Close();
-            } catch (IOException ioe)
-            {
-                fStream = new FileStream("test11.bruk", FileMode.Create);
-                this.Dispatcher.Invoke(() => { range.Save(fStream, DataFormats.Rtf); });
-                fStream.Close();
-            }
-
-
-            //LoadFile(_fileName);
-            LoadXamlPackage(_fileName);
-            File.Delete(_fileName);
-
-            TempContent = Regex.Replace(TempContent, "[\']", "\'\'");
-
-            return TempContent;
-        }
-
-        void LoadXamlPackage(string _fileName)
-        {
-            TextRange range;
-            FileStream fStream;
-            if (File.Exists(_fileName))
-            {
-                range = new TextRange(routerbox.Document.ContentStart, routerbox.Document.ContentEnd);
-                try
-                {
-                    fStream = new FileStream(_fileName, FileMode.OpenOrCreate);
-                    StreamReader reader = new StreamReader(fStream);
-                    TempContent = reader.ReadToEnd();
-
-                    this.Dispatcher.Invoke(() => { range.Load(fStream, DataFormats.Rtf); });
-                    //MessageBox.Show(TempContent);
-                    byte[] byteArray = Encoding.UTF8.GetBytes(TempContent);
-                    MemoryStream stream = new MemoryStream(byteArray);
-                    this.Dispatcher.Invoke(() => { range.Load(stream, DataFormats.Rtf); });
-                    fStream.Close();
-                } catch (IOException ioe)
-                {
-                    Console.WriteLine("NoteDetails: " + ioe);
-                    fStream = new FileStream("test11.bruk", FileMode.OpenOrCreate);
-                    StreamReader reader = new StreamReader(fStream);
-                    TempContent = reader.ReadToEnd();
-
-                    this.Dispatcher.Invoke(() => { range.Load(fStream, DataFormats.Rtf); });
-                    //MessageBox.Show(TempContent);
-                    byte[] byteArray = Encoding.UTF8.GetBytes(TempContent);
-                    MemoryStream stream = new MemoryStream(byteArray);
-                    this.Dispatcher.Invoke(() => { range.Load(stream, DataFormats.Rtf); });
-                    fStream.Close();
-                }
-            }
-        }*/
     }
 }

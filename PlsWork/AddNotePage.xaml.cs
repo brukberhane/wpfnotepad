@@ -39,15 +39,7 @@ namespace PlsWork
         {
             InitializeComponent();
 
-            //Inset the Note
-            //tempNote = ((App)Application.Current).TransferedNote;
-            //db.AddNote(tempNote);
-
-            //Prepare temp file location
-            //path = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "test1.bruk");
             path = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "test1.bruk");
-
-            //this.NavigationService.Navigating += NavigationService_Navigating;
 
             MessageBox.Show(tempNote.Title + "\n" + tempNote.Id);
 
@@ -93,9 +85,6 @@ namespace PlsWork
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             worker.RunWorkerAsync();
-
-            //var btn = sender as Button;
-            //btn.Visibility = Visibility.Collapsed;
         }
 
         private void NavigationService_Navigating(object sender, NavigatingCancelEventArgs e)
@@ -104,8 +93,6 @@ namespace PlsWork
             {
                 e.Cancel = true;
 
-                // titleEditText.RaiseEvent(new RoutedEventArgs(RichTextBox.TextChangedEvent));
-                //db.AddNote(tempNote);
                 worker.RunWorkerAsync();
             }
         }
@@ -121,23 +108,11 @@ namespace PlsWork
         private void DispatchTimer_Tick(object sender, EventArgs e)
         {
             worker.RunWorkerAsync();
-            //MessageBox.Show("Herro?");
         }
 
         private void titleEditText_TextChanged(object sender, TextChangedEventArgs e)
         {
             CheckTitleEmpty(titleEditText, titleTextBlock);
-
-            //trange = new TextRange(titleEditText.Document.ContentStart, titleEditText.Document.ContentEnd);
-            //tempNote.Title = trange.Text.Trim();
-            //TextRange crange = new TextRange(contentTextBox.Document.ContentStart, contentTextBox.Document.ContentEnd);
-            //tempNote.Content = crange.Text.Trim();
-
-            //db.UpdateNote(tempNote);
-
-            //savingButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-
-            //tempNote.Content = SaveXamlPackage(path);
         }
 
         private void CheckTitleEmpty(RichTextBox rtb, TextBlock txtblk)
@@ -170,8 +145,6 @@ namespace PlsWork
         private void contentTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             CheckTitleEmpty(contentTextBox, contentTextBlock);
-            //SaveXamlPackage("B:\\test.xaml");
-            //tempNote.Content = LoadXamlPackage("B:\\test.xaml");
         }
 
         string GetContent()
@@ -184,74 +157,6 @@ namespace PlsWork
                 return text = Regex.Replace(Encoding.UTF8.GetString(stream.ToArray()), "[\']", "\'\'");
             }
         }
-
-        /*string SaveXamlPackage(string _fileName)
-        {
-            TextRange range;
-            FileStream fStream;
-            range = new TextRange(contentTextBox.Document.ContentStart, contentTextBox.Document.ContentEnd);
-            fStream = new FileStream(_fileName, FileMode.Create);
-            //range.Text = Regex.Replace(range.Text, "[\']", "\'\'");
-            this.Dispatcher.Invoke(() => { range.Save(fStream, DataFormats.Rtf); });
-
-            fStream.Close();
-
-
-            
-            //LoadFile(_fileName);
-            LoadXamlPackage(_fileName);
-            File.Delete(_fileName);
-
-            TempContent = Regex.Replace(TempContent, "[\']", "\'\'");
-
-            return TempContent;
-        }
-
-        void LoadXamlPackage(string _fileName)
-        {
-            TextRange range;
-            FileStream fStream;
-            if (File.Exists(_fileName))
-            {
-                try
-                {
-                    range = new TextRange(routerbox.Document.ContentStart, routerbox.Document.ContentEnd);
-                    fStream = new FileStream(_fileName, FileMode.OpenOrCreate);
-                    StreamReader reader = new StreamReader(fStream);
-                    TempContent = reader.ReadToEnd();
-
-                    this.Dispatcher.Invoke(() => { range.Load(fStream, DataFormats.Text); });
-                    //MessageBox.Show(TempContent);
-                    byte[] byteArray = Encoding.UTF8.GetBytes(TempContent);
-                    MemoryStream stream = new MemoryStream(byteArray);
-                    this.Dispatcher.Invoke(() => { range.Load(stream, DataFormats.Rtf); });
-                    fStream.Close();
-                } catch (System.ExecutionEngineException eee)
-                {
-                    Console.WriteLine("Error in AddNotePage, \n" + eee.Message);
-                }
-            }
-        }
-
-        private void LoadFile(string path)
-        {
-            TextRange range;
-            FileStream fStream;
-            if (File.Exists(path))
-            {
-                range = new TextRange(contentTextBox.Document.ContentStart, contentTextBox.Document.ContentEnd);
-                fStream = new FileStream(path, FileMode.OpenOrCreate);
-                StreamReader reader = new StreamReader(fStream);
-                TempContent = reader.ReadToEnd();
-
-                range.Load(fStream, DataFormats.Text);
-                //MessageBox.Show(TempContent);
-                //byte[] byteArray = Encoding.UTF8.GetBytes(TempContent);
-                //MemoryStream stream = new MemoryStream(byteArray);
-                //range.Load(stream, DataFormats.Rtf);
-                fStream.Close();
-            }
-        }*/
 
         private void savingButton_Click(object sender, RoutedEventArgs e)
         {

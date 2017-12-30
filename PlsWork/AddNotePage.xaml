@@ -13,8 +13,7 @@
         <SolidColorBrush x:Key="brushWatermarkForeground" Color="LightSteelBlue" />
         <SolidColorBrush x:Key="brushWatermarkBorder" Color="Indigo" />
 
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" /><!--
-        <local:TextInputToVisibilityConverter x:Key="TextInputToVisibilityConverter" />-->
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
         <Style x:Key="EntryFieldStyle" TargetType="Grid" >
             <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -29,7 +28,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--<RichTextBox Name="titleEditText" SpellCheck.IsEnabled="True"/>-->
         <Grid Grid.Row="0" Background="#FF252525" >
             <TextBlock Name="titleTextBlock" Margin="11,10"  Background="#FF252525" Text="This prompt dissappears as you type..." Foreground="{StaticResource brushWatermarkForeground}" />
             <RichTextBox Name="titleEditText"  Margin="10" Background="Transparent" BorderBrush="{StaticResource brushWatermarkBorder}" TextChanged="titleEditText_TextChanged"/>

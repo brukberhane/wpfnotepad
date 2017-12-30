@@ -12,7 +12,6 @@ namespace PlsWork
     {
         private bool CheckFileExists(string fileName)
         {
-                //var store = Path.Combine(Directory.GetCurrentDirectory(), fileName);
                 if (File.Exists(fileName))
                 {
                     return true;

@@ -52,8 +52,6 @@ namespace PlsWork
             var stack = btn.Parent as StackPanel;
             var note = stack.DataContext as Note;
 
-           // MessageBox.Show(note.Title + "\n" + note.Content + "\n" + note.CreationDate + "\n" + note.Id);
-
             db.DeleteNote(note);
             notes.Remove(note);
 
@@ -89,8 +87,7 @@ namespace PlsWork
         {
             if (e.Key == Key.Enter)
             {
-                //var note = autoCompleteBox.SelectedItem as Note;
-                //this.NavigationService.Navigate(new NoteDetails(note));
+
             }
         }
     }

@@ -14,8 +14,6 @@
         <SolidColorBrush x:Key="brushWatermarkBorder" Color="Indigo" />
 
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <!--
-        <local:TextInputToVisibilityConverter x:Key="TextInputToVisibilityConverter" />-->
 
         <Style x:Key="EntryFieldStyle" TargetType="Grid" >
             <Setter Property="HorizontalAlignment" Value="Stretch" />

@@ -17,7 +17,6 @@ namespace PlsWork
             using (SQLiteConnection conn = new SQLiteConnection("Data Source=NotesDatabse.sqlite"))
             {
                 conn.Open();
-                //SQLiteConnection.CreateFile("NotesDatabase.sqlite");
                 string sql = "CREATE TABLE IF NOT EXISTS Notes (id INTEGER PRIMARY KEY AUTOINCREMENT , title string, content string, createdate string)";
                 using (SQLiteCommand command = new SQLiteCommand(sql, conn))
                 {
@@ -54,7 +53,6 @@ namespace PlsWork
                 {
                     notes.Add(new Note
                     {
-                        //Id = tempINt,
                         Id = int.Parse(reader["id"].ToString()),
                         Title = reader["title"].ToString(),
                         Content = reader["content"].ToString(),

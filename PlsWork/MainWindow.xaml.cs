@@ -40,19 +40,14 @@ namespace PlsWork
             conn.Open();
             db = new DatabaseHelper();
             db.CreateDatabase();
-            //db.AddNote(new Note { Title = "lel", Content = "meow", CreationDate=DateTime.Now });
             notes = db.GetNotesList();
-            //lelele.ItemsSource = notes;
             string temsql = "select * from Notes order by id desc";
             SQLiteCommand command = new SQLiteCommand(temsql, conn);
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
                 Console.WriteLine("Title: "+reader["title"].ToString()+", Id: "+reader["id"].ToString());
-            //Important codeso refresh
-            //db.UpdateNote(new Note { Title = "lel", Content = "meow", Id = 2 });
             notes = db.GetNotesList();
             Note note = notes.Where(i => i.Title == "mlem").FirstOrDefault();
-            //lelele.ItemsSource = notes;
             
         }
 

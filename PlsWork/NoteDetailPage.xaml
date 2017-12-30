@@ -24,23 +24,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--<DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
-            <Button  Name="melm"  Content="&#xE107;" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Left"/>
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                <toolkit:AutoCompleteBox Name="autoCo2mpleteBox" Width="100" IsTextCompletionEnabled="True"
-                                     ItemsSource="{Binding notes}"
-                                     ValueMemberPath="Title">
-                    <toolkit:AutoCompleteBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <Label Content="{Binding Title}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </toolkit:AutoCompleteBox.ItemTemplate>
-                </toolkit:AutoCompleteBox>
-            </StackPanel>
-        </DockPanel>-->
-
         <Button Foreground="#FFA9A9A9" BorderBrush="#FFA9A9A9" Background="#FFA9A9A9" Content="Press to protec" HorizontalAlignment="Left"/>
 
         <controls:DropDownButton Content="Hello" HorizontalAlignment="Center"/>
@@ -98,9 +81,6 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-
-
-
 
     </Grid>
 </Page>
